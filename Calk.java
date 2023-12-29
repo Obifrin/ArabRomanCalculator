@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -139,46 +138,23 @@ class Main{
                 break;
             }
         }
-        if(actionIndex == 100){
-            try {
-                throw new IOException();
-            }catch (IOException e) {
-                return "Незадекларированная математичесая операция";
-            }
-        }
+        if(actionIndex == 100)throw new Exception("Незадекларированная математичесая операция");
         String [] b = expression.split(DanglingQuantifier[actionIndex]);
         if(b.length !=2)throw new Exception("Только 2 целочисленных значения");
-        if(!(ThatIsRoman.MyRoman1(b[0]) == ThatIsRoman.MyRoman1(b[1]))){
-            try {
-                throw new IOException();
-            }catch (IOException e) {
-                return "Значения должны быть из одной системы счисления";
-            }
-        }else{
-            boolean Roman = ThatIsRoman.MyRoman1(b[0]);
+        if(!(ThatIsRoman.MyRoman1(b[0]) == ThatIsRoman.MyRoman1(b[1]))) throw new Exception("Значения должны быть из одной системы счисления");
+        boolean Roman = ThatIsRoman.MyRoman1(b[0]);
             if(Roman){
                 boolean last = mapa.containsKey(b[0]);
                 boolean last1 = mapa.containsKey(b[1]);
                 if(!(last) || !(last1))throw new Exception(" Введите число от 1 до 10(от I до X)");
                 value1 = mapa.get(b[0]);
                 value2 = mapa.get(b[1]);
-                if(!(value1 > 0 && value1 < 11) || !(value2 > 0 && value2 < 11)){
-                    try {
-                        throw new IOException();
-                    }catch (IOException e) {
-                        return "Введите число от 1 до 10(от I до X)";
-                    }
-                }else{
-                    switch(actionIndex){
+                if(!(value1 > 0 && value1 < 11) || !(value2 > 0 && value2 < 11))throw new Exception("Введите число от 1 до 10(от I до X)");
+                switch(actionIndex){
                         case 0:
                             answer = value1-value2;
-                            if(answer < 1){try {
-                                throw new IOException();
-                            }catch (IOException e) {
-                               return "Ответ не может быть отрицательным";
-                            }
-                            }else{
-                                return finalAnswer = mapa2.get(answer);}
+                            if(answer < 1)throw new Exception("Ответ не может быть отрицательным");
+                            return finalAnswer = mapa2.get(answer);
                         case 1:
                             answer = value1+value2;
                             break;
@@ -189,20 +165,12 @@ class Main{
                             answer = value1*value2;
                             break;
                     }
-                finalAnswer = mapa2.get(answer);}
-
-
+                finalAnswer = mapa2.get(answer);
             }else{
                 value1 = Integer.parseInt(b[0]);
                 value2 = Integer.parseInt(b[1]);
-                if(!(value1 > 0 && value1 < 11) || !(value2 > 0 && value2 < 11)){
-                    try {
-                        throw new IOException();
-                    }catch (IOException e) {
-                        return "Введите число от 1 до 10(от I до X)";
-                    }
-                }else{
-                    switch(actionIndex){
+                if(!(value1 > 0 && value1 < 11) || !(value2 > 0 && value2 < 11))throw new Exception("Введите число от 1 до 10(от I до X)");
+                switch(actionIndex){
                         case 0:
                             answer = value1-value2;
                             break;
@@ -215,14 +183,11 @@ class Main{
                         case 3:
                             answer = value1*value2;
                             break;
-                    }
-                    finalAnswer = Integer.toString(answer);}
+                }
+                finalAnswer = Integer.toString(answer);
             }
-
-    }
         return finalAnswer;
     }
-
 }
 public class Calk{
     public static void main(String[] args) throws Exception {
